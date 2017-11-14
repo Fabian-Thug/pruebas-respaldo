@@ -1,6 +1,7 @@
 import { Component,OnInit,Input } from '@angular/core';
 import { Http, Response, Headers, HttpModule } from '@angular/http';
 import { Inicials } from '../inicial/inicial.models';
+import * as Rx from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/RX';
 import { Observable } from 'rxjs/RX';
