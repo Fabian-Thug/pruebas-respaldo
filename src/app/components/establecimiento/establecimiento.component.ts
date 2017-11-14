@@ -2,13 +2,13 @@ import  { Component } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import {NgForm} from '@angular/forms';
 import * as Rx from 'rxjs';
-import 'rxjs/RX';
-import { Observable } from 'rxjs/RX';
+//import 'rxjs/RX';
+//import { Observable } from 'rxjs/RX';
 
 //import { Establecimientos } from '../establecimiento/establecimiento.models';
 //import { EstablecimientoService } from '../establecimiento/establecimiento.service';
 import { Http, Response, Headers } from '@angular/http';
-import 'rxjs/add/operator/map';
+//import 'rxjs/add/operator/map';
 
 
 

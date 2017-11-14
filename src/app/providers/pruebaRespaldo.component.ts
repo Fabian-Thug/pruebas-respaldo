@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Http, Response, Headers, HttpModule } from '@angular/http';
 import * as Rx from 'rxjs';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/RX';
-import 'rxjs/add/operator/map';
+//import { Observable } from 'rxjs/Observable';
+//import 'rxjs/RX';
+//import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ApiPruebaRespaldo {
