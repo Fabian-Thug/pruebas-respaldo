@@ -1,6 +1,7 @@
 import  { Component } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import {NgForm} from '@angular/forms';
+import * as Rx from 'rxjs';
 import 'rxjs/RX';
 import { Observable } from 'rxjs/RX';
 
