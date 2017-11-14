@@ -1,0 +1,89 @@
+<div><!--
+	<div class=" #F2F2F2">
+		<h3 class="truncate" align="center">{{title}}</h3>
+	</div>-->
+	<div class="row">
+		<div class="col s3">
+			<ul>
+				<li>
+					<div class="card">
+						<div class="card-image" width="300px">
+							<img src="assets/img/entel-empresas.jpg">
+							<span class="card-title">Establecimientos: {{cantidad_establecimiento}}</span>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="card" >
+						<div class="card-image">
+							<img src="assets/img/Torre-Entel.jpg" height="160px">
+							<span class="card-title">Criticidad: {{criticidad}}</span>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="card" width="300px">
+						<div class="card-image">
+							<img src="assets/img/Torre-Entel.jpg" height="160px">
+							<span class="card-title">VSAT</span>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="card" width="300px">
+						<div class="card-image">
+							<img src="assets/img/Torre-Entel.jpg" height="160px">
+							<span class="card-title">VSAT</span>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="col s5">
+			<ul>
+				<li>
+					<div style="display: block">
+						<canvas baseChart
+							[data]="doughnutChartData"
+							[labels]="doughnutChartLabels"
+							[chartType]="doughnutChartType"
+							(chartHover)="chartHovered($event)"
+							(chartClick)="chartClicked($event)">
+						</canvas>                 
+					</div>
+				</li>
+				<li>
+					<div>
+						<div style="display: block">
+							<canvas baseChart
+									[datasets]="barChartData"
+									[labels]="barChartLabels"
+									[options]="barChartOptions"
+									[legend]="barChartLegend"
+									[chartType]="barChartType"
+									(chartHover)="chartHovered($event)"
+									(chartClick)="chartClicked($event)"></canvas>
+						</div>
+					</div>
+				</li>
+			</ul>
+			
+		</div>
+		<div class="col s3d">
+			<button type="button" class="btn btn-primary btn-block"
+			(click)="numeros_random(); numeros_random_barras()">
+			Actualizar
+			</button>
+		</div>
+	</div>
+</div>
+<script>
+	window.onload = function() {
+		console.log( "ready!" );
+	};
+	
+	$(document).ready(function(){
+		$('.collapsible').collapsible();
+  	});
+     
+</script>

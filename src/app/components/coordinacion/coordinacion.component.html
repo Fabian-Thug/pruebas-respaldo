@@ -1,0 +1,44 @@
+<estados></estados>
+<h3 align="center">{{nombre}}</h3>
+
+<ul class="collapsible" data-collapsible="accordion">
+        <li>
+          <div class="collapsible-header">
+            <i class="material-icons">filter_drama</i>   
+            <a>Codigo Servicio: </a>
+            <a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nombre Establecimiento: </a>   
+            <a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Estado: </a> 
+            <a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Fecha: </a> 
+            <a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Criticidad: </a> 
+           
+            </div>
+          <div class="collapsible-body"><p>
+
+                
+                <li>Fecha: {{fecha}}</li>
+                <li>Iteracion: {{iteracion}}</li>
+                <li>Prioridad: {{prioridad}}</li>
+            
+                <input type="text" [(ngModel)]="fechaCoordinada"/>
+                <a (click)="guardarFecha()" class="waves-effect waves-light btn #f4511e deep-orange darken-1">Guardar fecha</a>   
+                <a (click)="eliminarFecha()" class="waves-effect waves-light btn #1e88e5 blue darken-1">Eliminar fecha</a> 
+                </p></div>
+        </li>
+
+
+      </ul>
+      
+
+<script>
+  $(document).ready(function(){
+  // Open
+  $('.collapsible').collapsible('open', 0);
+
+  // Close
+  $('.collapsible').collapsible('close', 0);
+
+  // Destroy
+  $('.collapsible').collapsible('destroy');
+});
+      
+</script>

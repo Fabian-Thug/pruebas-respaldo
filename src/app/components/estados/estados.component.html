@@ -1,0 +1,44 @@
+<div class="">
+  <div class="row">
+    <div class="col s12 ">
+      <ul class="tabs .tabs-fixed-width">
+        <li class="tab col s2"><a [routerLink]="['/inicial']">Por gestionar</a></li>
+        <li class="tab col s2"><a [routerLink]="['/revisiont']">Revisión</a></li>
+        <li class="tab col s2"><a [routerLink]="['/coordinacion']">Coordinación</a></li>
+        <li class="tab col s2"><a [routerLink]="['/establecimiento']">Ejecución</a></li>
+        <li class="tab col s2"><a [routerLink]="['/ejecucion']">Prueba</a></li>
+        <li class="tab col s2"><a [routerLink]="['/resultado']">Resultado</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col s3">
+      <div class="input-field">
+        <i class="material-icons prefix">search</i>
+        <input placeholder="Buscar" id="first_name" type="text" class="validate" [(ngModel)]="busqueda" (change)="emitirEvento()">
+        <!--<p *ngIf="busqueda">  Parametro de busqueda : {{busqueda}} </p>-->
+      </div>
+    </div>  
+    
+    <form action="#">
+      <p class="col s1">
+        <input type="checkbox" id="test5" />
+        <label for="test5">Prioridad</label>
+      </p>
+      <p class="col s1">
+        <input type="checkbox" id="test6"  />
+        <label for="test6">Apto</label>
+      </p>
+      <p class="col s2">
+        <input type="checkbox" id="indeterminate-checkbox" />
+        <label for="indeterminate-checkbox">Pruebas erroneas</label>
+      </p>
+      <p class="col s3">
+        <input type="checkbox" id="filled-in-box" />
+        <label for="filled-in-box">Candidato a Coordinación</label>
+      </p>
+    </form>
+  </div>
+
+</div>

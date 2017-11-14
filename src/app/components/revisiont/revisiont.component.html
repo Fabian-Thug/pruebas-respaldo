@@ -1,0 +1,95 @@
+<estados></estados>
+<ul class="collapsible" data-collapsible="accordion">
+  <li *ngFor="let establecimiento of data">
+    <div class="collapsible-header row">
+      <i class="material-icons">filter_drama</i> 
+      <div class="col s2">{{establecimiento.numero_minsal}}</div>
+      <div class="col s4">{{establecimiento.tipo_sucursal}}</div>
+      <div class="col s2">{{establecimiento.comuna}}</div>
+    </div>
+    <div class="collapsible-body row">
+      <span class="col s6">
+        <h2>Detalle Establecimiento</h2>
+        <ul>
+          <li>Codigo Servicio : {{establecimiento.numero_minsal}}</li>
+          <li>Establecimiento : {{establecimiento.tipo_sucursal}}</li>
+          <li>Contratante : {{establecimiento.contratante}}</li>
+          <li>Comuna : {{establecimiento.comuna}}</li>
+          <li>Direccion : {{establecimiento.direccion}}</li>
+          <li>Criticidad : {{establecimiento.criticidad}}</li>
+          <li>Punto de Dato : {{establecimiento.punto_de_dato}}</li>
+          <li>Punto de voz : {{establecimiento.punto_de_telefono}}</li>
+          <li>Punto de video conferencia : {{establecimiento.punto_de_videoconferencia}}</li>
+          <li *ngIf="establecimiento.ancho_banda_saturacion">Ancho banda saturacion : {{establecimiento.ancho_banda_saturacion}}</li>
+          <li>Estado de establecimiento : {{establecimiento.descripcion_estado}}</li>
+        </ul>
+        <br>
+        
+        <table class="striped">
+          <thead>
+            <tr>
+                <th>#</th>
+                <th>Tipo de respaldo</th>
+                <th>Codigo servicio</th>
+                <th>IP</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Principal</td>
+              <td>{{establecimiento.tipo_enlace}}</td>
+              <td>{{establecimiento.numero_minsal}}</td>
+              <td>{{establecimiento.ipsla}}</td>
+            </tr>
+            <tr>
+              <td>Respaldo 1</td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Respaldo 2</td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Respaldo 3</td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <p>
+          <!--  aqui ira un btn que al guardar el revision vaya a coordinacion-->
+          <a (click)="guardarFecha()" class="waves-effect waves-light btn #f4511e deep-orange darken-1">Enviar a coordinacion</a>   
+          <a (click)="eliminarFecha()" class="waves-effect waves-light btn #1e88e5 blue darken-1">Editar Establecimiento</a> 
+        </p>
+      </span>
+      <span class="col s6">
+        <h2>Observaciones</h2>
+        <form action="#">
+          <label for="test5">Comentario &nbsp;</label>  
+          <input type="text" id="test5" />
+          <a (click)="tuputamadre()" class="waves-effect waves-light btn #f4511e deep-orange darken-1">Enviar a comentario</a>   
+          
+        </form>
+      </span>
+    </div>
+  </li>
+</ul>
+
+<script>
+   // Open
+   $('.collapsible').collapsible('open', 0);
+
+  // Close
+  $('.collapsible').collapsible('close', 0);
+
+  // Destroy
+  $('.collapsible').collapsible('destroy');
+        
+
+</script>

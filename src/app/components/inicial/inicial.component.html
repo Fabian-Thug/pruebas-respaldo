@@ -1,0 +1,221 @@
+<!-- Componente de busueda y filtro -->
+<estados (pasameLosDatos)="verDatos($event)"></estados>
+
+<div *ngIf="!loading" class="center">
+    <div class="preloader-wrapper big active">
+        <div class="spinner-layer spinner-blue">
+            <div class="circle-clipper left">
+            <div class="circle"></div>
+            </div><div class="gap-patch">
+            <div class="circle"></div>
+            </div><div class="circle-clipper right">
+            <div class="circle"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Componete de plugin NGX-Pagination -->
+<div class="container center" *ngIf="loading">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+
+<!-- En el *ngFor se encuentra un pipe llamado Paginate que pertenece al plgin de paginacion-->
+
+<ul  class="collapsible popout" data-collapsible="accordion">  
+    <li *ngFor="let establecimiento of data | busqueda: busqueda | paginate: { itemsPerPage: 20, currentPage: p }">
+        <div class="collapsible-header row" (click)="obtenerContactos(establecimiento.identificador)">
+            <i class="material-icons" *ngIf="establecimiento.criticidad == null">filter_drama</i> 
+            <i class="material-icons yellow-text text-darken-2"  *ngIf="establecimiento.criticidad == 3">star</i> 
+            <div class="col s2">{{establecimiento.numero_minsal}}</div>
+            <div class="col s4">{{establecimiento.tipo_sucursal}}</div>
+            <div class="col s2">{{establecimiento.comuna}}</div>
+            <p class="col s1">
+                <input type="checkbox" id="{{establecimiento.numero_minsal}}" (click)="agregarEstablecimiento(establecimiento.numero_minsal)" />
+                <label for="{{establecimiento.numero_minsal}}">seleccionar</label>
+            </p>
+        </div>
+        
+        <div class="collapsible-body row">
+            <span class="col s6">
+                <h3>Detalle Establecimiento</h3>
+                <ul>
+                    <li class="row">
+                            
+                            <div class="col s2">
+                                Prioridad
+                            </div>
+                            <div class="switch col s4">
+                                <label>
+                                No
+                                <input type="checkbox">
+                                <span class="lever"></span>
+                                Si
+                                </label>
+                            </div>
+                        </li>
+                    <li>Codigo Minsal : {{establecimiento.numero_minsal}} </li>
+                    <li>Establecimiento : {{establecimiento.tipo_sucursal}}</li>
+                    <li>Contratante : {{establecimiento.contratante}}</li>
+                    <li>Comuna : {{establecimiento.comuna}}</li>
+                    <li>Direccion : {{establecimiento.direccion}}</li>
+                    <li>Criticidad : {{establecimiento.criticidad}}</li>
+                    <li>Punto de Dato : {{establecimiento.punto_de_dato}}</li>
+                    <li>Punto de voz : {{establecimiento.punto_de_telefono}}</li>
+                    <li *ngIf="establecimiento.ancho_banda_saturacion">Ancho banda saturacion : {{establecimiento.ancho_banda_saturacion}}</li>
+                    
+                </ul>
+                <br>
+                <table class="striped">
+                    <thead>
+                        <tr>
+                            <th>Tipo enlace</th>
+                            <th>Tipo de conexión</th>
+                            <th>Codigo servicio</th>
+                            <th>IP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Principal</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Respaldo 1</td>
+                            <td>{{establecimiento.tipo_acceso}}</td>
+                            <td>{{establecimiento.codser_estable_enlace}}</td>
+                            <td>{{establecimiento.ipsla}}</td>
+                        </tr>
+                        <tr>
+                            <td>Respaldo 2</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Respaldo 3</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <p>
+                    <!--  aqui ira un btn que al guardar el revision vaya a coordinacion-->
+                    <a (click)="guardarFecha()" class="waves-effect waves-light btn #f4511e deep-red darken-1" >Enviar a revision</a>   
+                    <a (click)="guardarFecha()" class="waves-effect waves-light btn #f4511e deep-orange darken-1" >Enviar a coordinacion</a>   
+                    
+                </p>
+            </span>
+            <span class="col s6">
+                <h3>Contactos</h3>
+                <div class="progress" *ngIf="!carga">
+                        <div class="indeterminate"></div>
+                </div>
+                <table class="striped">
+                        
+                        <thead>
+                            <tr>
+                                <th>Encargado</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Numeros contacto</th>
+                                <th>Correo</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody *ngIf="carga">
+                            <tr *ngFor="let datos of contat" >
+                                <td>{{datos.rol}}</td>
+                                <td>{{datos.nombre}}</td>
+                                <td>{{datos.apellido}}</td>
+                                <td>{{datos.contacto}}</td>
+                                <td>{{datos.correo}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a class="waves-effect waves-light btn modal-trigger" data-target="modal1">Observaciones</a>
+            </span>
+        </div>
+    </li>
+</ul>
+<!-- boton flotante para generar campaña-->
+<div class="fixed-action-btn horizontal">
+    <a class="btn-floating btn-large red">
+        <i class="large material-icons">mode_edit</i>
+    </a>
+    <ul>
+         <!-- Modal Trigger -->
+        <li><a class="btn-floating green waves-effect waves-light btn modal-trigger" data-target="crearCampaña"><i class="material-icons">publish</i></a></li>
+    </ul>
+</div>
+
+<!-- Componete de plugin NGX-Pagination -->
+<div class="container center" *ngIf="loading">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+
+<!-- Modal Structure -->
+<div id="crearCampaña" class="modal">
+    <div class="modal-content row">
+        <h4 class="col s8">Generar campaña</h4>
+        <a class="waves-effect waves-light btn col s4 modal-trigger" data-target="mostrarEstablecimientos"><i class="material-icons right">cloud</i>Establecimientos</a>
+    
+    </div>
+    <div class="modal-content">
+        <h2 *ngIf="revision.length == 0">No hay establecimientos seleccionados para generar una campaña</h2>
+    </div>
+    <div class="modal-footer">
+        <a [routerLink]="['/inicial']" class="modal-action modal-close waves-effect waves-green btn-flat">Listo</a>
+    </div>
+</div>
+<!--Modal de establecimientos seleccionados-->
+<div id="mostrarEstablecimientos" class="modal bottom-sheet">
+    <div class="modal-content">
+        <h4>Establecimientos Seleccionados</h4>
+        <div>
+            <ul class="collection">
+                <li *ngFor="let establecimiento of revision" class="collection-item"><div>{{establecimiento}}<a (click)="agregarEstablecimiento(establecimiento)" class="secondary-content"><i class="material-icons">clear</i></a></div></li>
+            </ul>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a [routerLink]="['/inicial']" class="modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
+    </div>
+</div>
+
+<!-- Modal observaciones -->
+<div id="modal1" class="modal divcoment">
+    <div class="modal-content row">
+        <h4 class="col s8">Observaciones</h4>
+        <a class="waves-effect waves-light btn modal-trigger" data-target="modal2">Comentar</a>
+    </div>
+    <div class="modal-content">
+        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>     
+        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>     
+        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>     
+    </div>
+    <div class="modal-footer">
+        <a [routerLink]="['/inicial']" class="modal-action modal-close waves-effect waves-green btn-flat">Listo</a>
+        
+    </div>
+</div>
+
+<div id="modal2" class="modal material">
+    <div class="modal-content row">  
+        <h6>Comentar</h6>
+        <form class="col s12">
+            <div class="row">
+                <div class="input-field col s8">
+                    <textarea id="textarea1" class="materialize-textarea"></textarea>
+                </div>
+                <div col s4>
+                    <a class="waves-effect waves-light btn modal-trigger" data-target="modal2">Enviar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

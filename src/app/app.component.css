@@ -1,0 +1,8 @@
+body{
+    background: #0089ec17
+}
+
+div#down{
+    bottom: 0;
+    position: fixed;
+}
